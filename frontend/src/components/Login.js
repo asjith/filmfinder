@@ -4,7 +4,7 @@ import { validateForm } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
+  updateProfile
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingGuest, setLoadingGuest] = useState(false);
   const fullName = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -51,7 +52,7 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           updateProfile(auth.currentUser, {
-            displayName: fullName.current.value,
+            displayName: fullName.current.value
           })
             .then(() => {
               const { uid, email, displayName } = auth.currentUser;
@@ -90,6 +91,26 @@ const Login = () => {
           setLoading(false);
         });
     }
+  };
+
+  const handleGuestLogin = () => {
+    setLoadingGuest(true);
+    signInWithEmailAndPassword(
+      auth,
+      process.env.REACT_APP_GUEST_USERNAME,
+      process.env.REACT_APP_GUEST_PASSWORD
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        setLoadingGuest(false);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMsg(errorMessage);
+        setLoadingGuest(false);
+      });
   };
 
   const { isMobile } = useBreakpoints();
@@ -132,15 +153,18 @@ const Login = () => {
           className="my-3 p-3 w-full bg-black border border-gray-600 rounded-md"
           ref={password}
         ></input>
-        {
-          !isSignIn && (<p className="p-3 w-full text-xs">* Password must be at least 8 characters and include uppercase, lowercase, and a number</p>)
-        }
+        {!isSignIn && (
+          <p className="p-3 w-full text-xs">
+            * Password must be at least 8 characters and include uppercase,
+            lowercase, and a number
+          </p>
+        )}
         <p className="my-5 font-bold text-red-700">{errorMsg}</p>
         <button
           type="submit"
           className={
-            "my-3 p-2 w-full bg-red-700 font-bold rounded-md  " +
-            (loading && "bg-opacity-25")
+            "my-3 p-2 w-full bg-red-700 font-bold rounded-md hover:bg-opacity-75  " +
+            (loading && "  bg-opacity-25")
           }
           onClick={handleSignInUp}
         >
@@ -158,12 +182,36 @@ const Login = () => {
         </button>
         <button
           type="button"
+          className={
+            "my-3 p-2 w-full border-2 border-red-700 text-red-700 font-bold rounded-md hover:border-opacity-75 hover:text-opacity-75"
+          }
+          title="View the application as a guest — no login required."
+          onClick={handleGuestLogin}
+        >
+          {loadingGuest ? (
+            <img
+              className="rotate w-5 h-5 mx-auto"
+              src={loadingURL}
+              alt="loading"
+            />
+          ) : (
+            "Continue as guest"
+          )}
+        </button>
+        <button
+          type="button"
           className="my-5 cursor-pointer"
           onClick={handleIsSignInUp}
         >
-          {isSignIn
-            ? (<p>New to FilmFinder? <span className="font-bold">Sign Up now</span></p>)
-            : (<p>Already registered? <span className="font-bold">Sign In now</span></p> )}
+          {isSignIn ? (
+            <p>
+              New to FilmFinder? <span className="font-bold">Sign Up now</span>
+            </p>
+          ) : (
+            <p>
+              Already registered? <span className="font-bold">Sign In now</span>
+            </p>
+          )}
         </button>
       </form>
     </div>
