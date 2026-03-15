@@ -12,12 +12,17 @@ https://filmfinder-gpt.vercel.app
 
 ## ✨ Features
 
-- Browse trending movies, trailers, cast, and detailed metadata using TMDB APIs
-- AI-powered movie recommendations using OpenAI API with mood-based and preference-driven queries
-- Reusable Netflix-inspired horizontal carousel components for smooth content browsing
-- Robust async UX patterns including loading skeletons, error states, offline detection, and automatic refetch on network reconnection
-- Firebase authentication with persistent session handling
-- Fully responsive UI built with Tailwind CSS
+- 🎥 Browse trending movies, trailers, cast, and detailed metadata using TMDB APIs
+- 🤖 AI-powered movie recommendations using OpenAI API with mood-based and preference-driven queries
+- 🔄 Reusable Netflix-inspired horizontal carousel components for smooth content browsing
+- ⚡ Robust async UX patterns:
+  - Loading skeletons
+  - Error and empty states
+  - Offline detection
+  - Automatic refetch on network reconnection
+- 🔐 Firebase Authentication with persistent session handling
+- 👤 Guest Login support for users who want to explore without signing up
+- 📱 Fully responsive UI built with Tailwind CSS
 
 ---
 
