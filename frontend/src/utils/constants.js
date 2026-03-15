@@ -5,7 +5,7 @@ export const BREAKPOINTS = {
   mobile: 0,
   tablet: 768,
   desktop: 1024,
-  largeDesktop: 1440,
+  largeDesktop: 1440
 };
 
 export const MOVIE_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
@@ -16,7 +16,7 @@ export const MOVIE_BACKGROUND_IMAGE_SIZE = "w1280";
 export const SUPPORTED_LANGUAGE = [
   { id: "en", name: "English" },
   { id: "hindi", name: "Hindi" },
-  { id: "malayalam", name: "Malayalam" },
+  { id: "malayalam", name: "Malayalam" }
 ];
 
 export const TMDB_SEARCH =
@@ -45,3 +45,6 @@ export const TMDB_MOVIE_DETAILS =
 
 export const TMDB_MOVIE_CAST =
   "https://netflix-gpt-backend-tau.vercel.app/api/cast?movieId=";
+
+export const OPENAI_MOVIE_RECOMMENDATION =
+  "https://netflix-gpt-backend-tau.vercel.app/api/movie-recommendations?searchQuery=";
