@@ -17,17 +17,17 @@ const Body = () => {
       element: <Browse />,
       children: [
         {
-          path: "/browse",
+          index: true,
+          element: <GptSearch />,
+        },
+        {
+          path: "discover",
           element: (
             <>
               <MainContainer />
               <SecondaryContainer />
             </>
           ),
-        },
-        {
-          path: "gptSearch",
-          element: <GptSearch />,
         },
         {
           path: "details",
