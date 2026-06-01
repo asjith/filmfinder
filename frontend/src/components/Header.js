@@ -48,8 +48,8 @@ const Header = () => {
       });
   };
 
-  const handleGptSearch = () => {
-    navigate("/browse/gptSearch");
+  const handleDiscover = () => {
+    navigate("/browse/discover");
   };
 
   const handleHome = () => {
@@ -86,12 +86,12 @@ const Header = () => {
             <img className="mx-2 w-4 md:w-8" src={home} title="Home" />
           </button>
 
-          {!enableGptSearch && (
-            <button onClick={handleGptSearch}>
+          {enableGptSearch && (
+            <button onClick={handleDiscover}>
               <img
                 className="mx-2 w-4 md:w-8"
                 src={search}
-                title="GPT-Search"
+                title="Discover"
               />
             </button>
           )}

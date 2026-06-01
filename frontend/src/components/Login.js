@@ -95,6 +95,7 @@ const Login = () => {
 
   const handleGuestLogin = () => {
     setLoadingGuest(true);
+    console.log(process.env.REACT_APP_GUEST_USERNAME, process.env.REACT_APP_GUEST_PASSWORD);
     signInWithEmailAndPassword(
       auth,
       process.env.REACT_APP_GUEST_USERNAME,
